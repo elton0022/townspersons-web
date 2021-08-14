@@ -1,29 +1,21 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <Header />
+    <div class="pages">
+      <router-view />
+    </div>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
-import api from './config/api';
+import Header from "./components/Header.vue";
 
 export default {
-  name: 'App',
+  name: "App",
   components: {
-    HelloWorld
+    Header,
   },
-  async mounted(){
-    await this.getTownspersons();
-  },
-  methods:{
-    async getTownspersons(){
-      const townspersons = await api.get('/townsperson');
-      console.log(townspersons);
-    }
-  }
-}
+};
 </script>
 
 <style>
@@ -33,6 +25,29 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
+  margin: 0px;
+  padding: 0px;
+}
+
+html,
+body {
+  margin: 0px;
+  padding: 0px;
+}
+
+.pages {
+  margin-top: 20px;
+  padding: 24px;
+}
+
+.pages .content {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 10px;
+  min-height: 500px;
+  box-shadow: -4px -4px 10px #0000001a, 4px 4px 10px #0000001a;
+  border-radius: 5px;
 }
 </style>

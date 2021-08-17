@@ -8,18 +8,19 @@
     <div class="content">
       <v-container class="grey lighten-5">
         <v-row>
-          <div class="photo">
+          <div class="select-photo">
             <img
-              style="width: 100px; height: 100px"
-              :src="previewPhoto"
-              alt="asdsdasd"
+              id="photo"
+              :src="emptyPhoto"
+              alt="Foto do Perfil"
             />
             <v-file-input
               accept="imarulesge/png, image/jpeg, image/bmp"
               placeholder="Clique aqui"
               prepend-icon="mdi-camera"
-              label="Escolha uma foto"
+              label="..."
               v-model="townsperson.photo"
+              @change="changePhoto"
             ></v-file-input>
           </div>
         </v-row>
@@ -62,6 +63,7 @@
 
 <script>
 import Navtools from "../components/Navtools.vue";
+import emptyPhoto from "../assets/icons/emptyPhoto.png";
 
 //import api from "../config/api";
 
@@ -69,6 +71,7 @@ export default {
   name: "FormTownsperson",
   data() {
     return {
+      emptyPhoto,
       previewPhoto: null,
       townsperson: {
         name: "",
@@ -77,7 +80,7 @@ export default {
         email: "",
         birth_date: "",
         phone: "",
-        photo: '../icons/logo.svg',
+        photo: "../icons/logo.svg",
         status: "",
       },
       address: {
@@ -101,25 +104,35 @@ export default {
       //this.townspersons = response.data;
       console.log(this.townsperson);
     },
-    /*readURL(input) {
-      if (input) {
-        var reader = new FileReader();
-
-        reader.onload = function (e) {
-          this.previewPhoto = e.target.result;
+    changePhoto() {
+      var fr = new FileReader();
+      if (this.townsperson.photo) {
+        fr.onload = function () {
+          document.getElementById("photo").src = fr.result;
         };
-
-        reader.readAsDataURL(input);
+        fr.readAsDataURL(this.townsperson.photo);
+      }else{
+         document.getElementById("photo").src = emptyPhoto;
       }
-    },*/
+    },
   },
 };
 </script>
 
 <style scoped>
-.photo {
+.select-photo {
   width: 400px;
-  height: 100px;
+  height: 200px;
   margin: 0 auto;
+  margin-top: 30px;
+}
+
+#photo {
+  width: 100%;
+  max-width: 150px;
+  height: 150px;
+  object-fit: cover;
+  border-radius: 5px;
+  filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25)) drop-shadow(-4px -4px 10px rgba(0, 0, 0, 0.05));
 }
 </style>

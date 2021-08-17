@@ -38,9 +38,6 @@ body {
 }
 .pages .content {
   width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
   margin-top: 10px;
   min-height: 500px;
   box-shadow: -4px -4px 10px #0000001a, 4px 4px 10px #0000001a;

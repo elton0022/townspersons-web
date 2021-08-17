@@ -9,7 +9,6 @@
 
 <script>
 import Header from "./components/Header.vue";
-
 export default {
   name: "App",
   components: {
@@ -28,18 +27,15 @@ export default {
   margin: 0px;
   padding: 0px;
 }
-
 html,
 body {
   margin: 0px;
   padding: 0px;
 }
-
 .pages {
   margin-top: 20px;
   padding: 24px;
 }
-
 .pages .content {
   width: 100%;
   display: flex;

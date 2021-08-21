@@ -1,10 +1,10 @@
 <template>
-  <div id="app">
+  <v-app id="app" :theme="theme">
     <Header />
     <div class="pages">
       <router-view />
     </div>
-  </div>
+  </v-app>
 </template>
 
 <script>
@@ -13,6 +13,15 @@ export default {
   name: "App",
   components: {
     Header,
+  },
+  data() {
+    return {
+      theme: "light",
+    };
+  },
+  methods: {
+    toggleTheme: () =>
+      (this.theme.value = this.theme.value === "light" ? "dark" : "light"),
   },
 };
 </script>

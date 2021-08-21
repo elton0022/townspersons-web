@@ -1,8 +1,10 @@
 import axios from 'axios';
 import { api_url } from '../../env';
 
-const api = axios.create({
+export const api = axios.create({
     baseURL: api_url
 });
 
-export default api;
+export const apiViaCEP = axios.create({
+    baseURL: 'https://viacep.com.br/ws/'
+});

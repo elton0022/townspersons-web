@@ -15,7 +15,7 @@
 import Card from "../components/Card.vue";
 import Navtools from "../components/Navtools.vue";
 
-import api from "../config/api";
+import { api } from "../config/api";
 
 export default {
   name: "Townsperson",

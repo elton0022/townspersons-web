@@ -1,6 +1,7 @@
 <template>
   <div class="header">
-    <h2 class="title">Cadastro</h2>
+    <h2 class="name-logo">Munícipes</h2>
+    <v-icon large color="primary"> mdi-city-variant </v-icon>
   </div>
 </template>
 
@@ -23,15 +24,14 @@ export default {
   height: 80px;
   display: flex;
   flex-direction: row;
-  justify-content: flex-start;
+  justify-content: center;
   align-items: center;
   box-shadow: -6px -6px 30px #435d6b40, 6px 6px 30px #00000040;
 }
 
-.header .title {
-  margin-left: 20px;
+.header .name-logo {
+  margin: 10px 10px 0 0; 
 }
-
 
 @media screen and (max-width: 600px) {
   .header {

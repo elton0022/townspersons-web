@@ -40,7 +40,7 @@
               <v-text-field
                 v-model="townsperson.cpf"
                 label="CPF"
-                :rules="rules"
+                :rules="cpfRules"
                 hide-details="auto"
               ></v-text-field>
             </v-col>
@@ -72,9 +72,7 @@
             </v-col>
             <v-col cols="12" sm="3">
               <BirthDate
-                @change="
-                  (value) => (townsperson.birth_date = formatDate(value))
-                "
+                @change="(value) => (townsperson.birth_date = value)"
               />
             </v-col>
             <v-col cols="12" sm="3">
@@ -152,24 +150,24 @@
               ></v-text-field>
             </v-col>
           </v-row>
-          <!-- <v-row>
-          <v-col align="center">
-            <v-btn
-              :loading="loading"
-              :disabled="loading"
-              color="primary"
-              class="ma-2 white--text"
-              @click="loader = 'loading'"
-            >
-              Salvar
-              <v-icon dark right> mdi-checkbox-marked-circle </v-icon>
-            </v-btn>
-          </v-col>
-        </v-row> -->
+          <v-row>
+            <v-col cols="12" sm="2" align="left">
+              <v-btn
+                :loading="loading"
+                :disabled="loading"
+                color="primary"
+                id="button-save"
+                large
+                @click="addTownsperson()"
+              >
+                Salvar
+                <v-icon dark right> mdi-checkbox-marked-circle </v-icon>
+              </v-btn>
+            </v-col>
+          </v-row>
         </div>
       </v-container>
     </div>
-    <button v-on:click="addTownsperson()" class="register">Salvar</button>
   </div>
 </template>
 
@@ -177,11 +175,12 @@
 import Navtools from "../components/Navtools.vue";
 import BirthDate from "../components/BirthDate.vue";
 import emptyPhoto from "../assets/icons/emptyPhoto.png";
-import { apiViaCEP } from "../config/api";
+import { apiViaCEP, api } from "../config/api";
 export default {
   name: "FormTownsperson",
   data() {
     return {
+      loading: false,
       previewPhoto: emptyPhoto,
       townsperson: {
         name: "",
@@ -203,6 +202,10 @@ export default {
         code_IBGE: "",
       },
       rules: [(value) => !!value || "Não pode ser vazio"],
+      cpfRules: [
+        (value) => !!value || "Não pode ser vazio",
+        (value) => value.length === 11 || "Digite os 11 caracteres",
+      ],
     };
   },
   components: {
@@ -210,12 +213,34 @@ export default {
     BirthDate,
   },
   methods: {
-    addTownsperson() {
-      //const response = await api.post("/townsperson");
-      //this.townspersons = response.data;
-      // const [day, month, year] = this.dateFormatted.split("/");
-      // this.townsperson.birth_date = `${year}-${month}-${day}`;
-      console.log(this.townsperson);
+    async addTownsperson() {
+      const formPersonalData = Object.values(this.townsperson);
+      const formAdress = Object.values(this.address);
+
+      if (formPersonalData.includes("") || formAdress.includes("")) {
+        alert("Alguns Campos estão vazios");
+      } else {
+        const data = new FormData();
+
+        data.append("photo", this.townsperson.photo);
+        data.append("name", this.townsperson.name);
+        data.append("cpf", this.townsperson.cpf);
+        data.append("cns", this.townsperson.cns);
+        data.append("email", this.townsperson.email);
+        data.append("birth_date", this.townsperson.birth_date);
+        data.append("phone", this.townsperson.phone);
+        data.append("status", this.townsperson.status);
+        data.append("address", this.address);
+
+        console.log(data.values);
+
+        const response = await api.post("/townsperson", data);
+        if (!response.data || !response) {
+          alert(response);
+        } else {
+          alert("Adicionado!!");
+        }
+      }
     },
     changePhoto() {
       var fr = new FileReader();
@@ -258,6 +283,11 @@ export default {
   margin: 0 auto;
   margin-top: 30px;
 }
+
+#button-save {
+  margin-top: 30px;
+}
+
 #photo {
   width: 100%;
   max-width: 120px;

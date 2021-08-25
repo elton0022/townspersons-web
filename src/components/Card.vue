@@ -43,11 +43,11 @@ export default {
 .card {
   width: 100%;
   max-width: 200px;
-  height: 230px;
+  height: 250px;
   font-size: 17px;
   border-radius: 5px;
   border:1px solid #ddd;
-  filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25)) drop-shadow(-4px -4px 10px rgba(0, 0, 0, 0.05));
+  box-shadow: -4px -4px 10px #0000000d, 4px 4px 10px #0000000d;
   cursor: pointer;
 }
 

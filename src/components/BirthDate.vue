@@ -16,6 +16,7 @@
         @blur="date = parseDate(dateFormatted)"
         v-bind="attrs"
         v-on="on"
+        :rules="rules"
       ></v-text-field>
     </template>
     <v-date-picker
@@ -35,7 +36,7 @@
 
 <script>
 export default {
-  name: 'BirthDate',
+  name: "BirthDate",
   data() {
     return {
       menu: false,
@@ -44,6 +45,7 @@ export default {
         .substr(0, 10),
       activePicker: null,
       dateFormatted: null,
+      rules: [(value) => !!value || "Não pode ser vazio"],
     };
   },
   watch: {
@@ -56,6 +58,7 @@ export default {
   },
   methods: {
     save(date) {
+      this.$emit("change", date);
       this.$refs.menu.save(date);
     },
     formatDate(date) {

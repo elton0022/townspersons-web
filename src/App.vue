@@ -42,13 +42,14 @@ body {
   padding: 0px;
 }
 .pages {
+  height: 1000px;
   margin-top: 20px;
   padding: 24px;
 }
 .pages .content {
   width: 100%;
   margin-top: 10px;
-  min-height: 500px;
+  max-height: 1000px;
   box-shadow: -4px -4px 10px #0000001a, 4px 4px 10px #0000001a;
   border-radius: 5px;
 }

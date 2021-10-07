@@ -220,7 +220,8 @@ export default {
       if (formPersonalData.includes("") || formAdress.includes("")) {
         alert("Alguns Campos estão vazios");
       } else {
-        const data = new FormData();
+        let data = new FormData();
+        let addressText = JSON.stringify(this.address);
 
         data.append("photo", this.townsperson.photo);
         data.append("name", this.townsperson.name);
@@ -230,16 +231,20 @@ export default {
         data.append("birth_date", this.townsperson.birth_date);
         data.append("phone", this.townsperson.phone);
         data.append("status", this.townsperson.status);
-        data.append("address", this.address);
+        data.append("address", addressText);
 
-        console.log(data.values);
-
-        const response = await api.post("/townsperson", data);
+        let config = {
+          header : {
+            'Content-Type' : 'multipart/form-data'
+          }
+        }
+        const response = await api.post("/townsperson", data, config);
         if (!response.data || !response) {
           alert(response);
         } else {
           alert("Adicionado!!");
         }
+        
       }
     },
     changePhoto() {

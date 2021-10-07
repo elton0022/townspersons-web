@@ -57,12 +57,28 @@ export default {
   grid-template-rows: repeat(3, 200px);
   grid-template-columns: repeat(3, 200px);
   grid-gap: 90px;
+
 }
 
 .add{
   position: fixed !important;
   right: 5% !important;
   bottom: 10% !important;
+}
+
+@media screen and (max-width: 900px) {
+  .page-body{
+    grid-template-rows: repeat(2, 200px);
+    grid-template-columns: repeat(2, 200px) !important;
+  }
+}
+
+
+@media screen and (max-width: 546px) {
+  .page-body{
+    grid-template-rows: repeat(1, 200px);
+    grid-template-columns: repeat(1, 200px) !important;
+  }
 }
 
 </style>

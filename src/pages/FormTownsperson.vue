@@ -151,7 +151,7 @@
             </v-col>
           </v-row>
           <v-row>
-            <v-col cols="12" sm="2" align="left">
+            <v-col cols="12" sm="12" align="right">
               <v-btn
                 :loading="loading"
                 :disabled="loading"
@@ -220,6 +220,7 @@ export default {
       if (formPersonalData.includes("") || formAdress.includes("")) {
         alert("Alguns Campos estão vazios");
       } else {
+        this.loading = true;
         let data = new FormData();
         let addressText = JSON.stringify(this.address);
 
@@ -244,6 +245,8 @@ export default {
         } else {
           alert("Adicionado!!");
         }
+
+        this.loading = false;
         
       }
     },

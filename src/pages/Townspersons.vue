@@ -9,6 +9,7 @@
       <div class="page-body">
         <div v-for="person in townspersons" :key="person.id">
           <Card :townsperson="person" />
+          <h5 v-if="townspersons.length === 0"> Não há cadastros!!</h5>
         </div>
         <v-btn class="add" fab dark large color="primary" @click="changePage()">
           <v-icon dark> mdi-plus </v-icon>

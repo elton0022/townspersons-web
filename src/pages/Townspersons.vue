@@ -6,6 +6,7 @@
       title-page="Lista de Munícipes"
     />
     <div class="content">
+      <h4 class="not-found" v-if="townspersons.length === 0"> Não há cadastros!!</h4>
       <div class="page-body">
         <div v-for="person in townspersons" :key="person.id">
           <Card :townsperson="person" />
@@ -14,7 +15,6 @@
           <v-icon dark> mdi-plus </v-icon>
         </v-btn>
       </div>
-      <h5 v-if="townspersons.length === 0"> Não há cadastros!!</h5>
     </div>
   </div>
 </template>
@@ -59,6 +59,10 @@ export default {
   grid-template-columns: repeat(3, 200px);
   grid-gap: 90px;
 
+}
+
+.not-found{
+  padding-top: 30px;
 }
 
 .add{
